@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	<context:property-placeholder location="app.properties"/>
+	<context:component-scan base-package="my.spring.examples"></context:component-scan>
+	<bean id="ie" class="my.spring.examples.InjectionExamples"
+		init-method="init" p:stringProp="this is the string prop">
+	<constructor-arg name="cp" type="java.lang.String"
+		value="constructor injected">
+	</constructor-arg>
+	<property name="intList">
+	<util:list value-type="java.lang.Integer">
+		<value>10</value>
+		<value>20</value>
+	</util:list>
+	</property>
+	<property name="intMap">
+		<util:map key-type="java.lang.String"
+			value-type="java.lang.Integer">
+			<entry key="Hello" value="10"></entry>
+			<entry key="World" value="20"></entry>
+		</util:map>
+	</property>
+	<property name="fileProp" value="${value.fromProp}"></property>
+	</bean>
+</beans>
