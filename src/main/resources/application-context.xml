@@ -7,26 +7,36 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-	<context:property-placeholder location="app.properties"/>
-	<context:component-scan base-package="my.spring.examples"></context:component-scan>
+
+	<!-- context:property-placeholder used to set .properties file -->
+	<context:property-placeholder
+		location="app.properties" />
+
+	<!-- context:component-scan used to define which packages to search for 
+		@Value substitution -->
+	<context:component-scan
+		base-package="my.spring.examples"></context:component-scan>
+
+	<!-- p:<variable_name> used to set property values in shorthand 
+		alternatively, properties can be set using the property tag -->
 	<bean id="ie" class="my.spring.examples.InjectionExamples"
 		init-method="init" p:stringProp="this is the string prop">
-	<constructor-arg name="cp" type="java.lang.String"
-		value="constructor injected">
-	</constructor-arg>
-	<property name="intList">
-	<util:list value-type="java.lang.Integer">
-		<value>10</value>
-		<value>20</value>
-	</util:list>
-	</property>
-	<property name="intMap">
-		<util:map key-type="java.lang.String"
-			value-type="java.lang.Integer">
-			<entry key="Hello" value="10"></entry>
-			<entry key="World" value="20"></entry>
-		</util:map>
-	</property>
-	<property name="fileProp" value="${value.fromProp}"></property>
+		<constructor-arg name="cp" type="java.lang.String"
+			value="constructor injected">
+		</constructor-arg>
+		<property name="intList">
+			<util:list value-type="java.lang.Integer"> <!-- util namespace used to establish collections-type objects -->
+				<value>10</value>
+				<value>20</value>
+			</util:list>
+		</property>
+		<property name="intMap">
+			<util:map key-type="java.lang.String"
+				value-type="java.lang.Integer">
+				<entry key="Hello" value="10"></entry>
+				<entry key="World" value="20"></entry>
+			</util:map>
+		</property>
+		<property name="fileProp" value="${value.fromProp}"></property> <!-- ${variable_name} used to refer to variables in the .properties file -->
 	</bean>
 </beans>
