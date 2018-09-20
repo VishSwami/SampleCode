@@ -6,8 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
+@Slf4j
 public class InjectionExamples {
 	String stringProp; // from p-namespace
 	@Value("10")
@@ -24,10 +26,12 @@ public class InjectionExamples {
 	String constProp; // constructor-arg
 	
 	public InjectionExamples(String cp) {
+		log.info("constructing InjectionExamples.java");
 		constProp = cp;
 	}
 	
 	public void init() {
+		log.info("initializing InjectionExamples.java");
 		System.out.println(stringProp);
 		System.out.println(intProp);
 		System.out.println(intList);
